@@ -1,21 +1,14 @@
 <html>
 <head>
-<style>
-table, th, td
-{
-border: 1px solid black;
-}
-
-</style>    
+<link href="assets/bootstrap.css" rel="stylesheet">
 </head>
 </body>
 <?php
 
 $host = "localhost"; 
-$user = "root"; 
+$user = "root";
 $pass = ""; 
 $db = "theatre";
-
 
 $r = mysql_connect($host, $user, $pass);
 
@@ -40,11 +33,10 @@ if (!$rs) {
 } else {
 } 
 echo '<div style="display:inline;float:left;">';
-echo "Movies";
+echo "<h4>Movies</h4>";
 echo "<table><td>movie_id</td><td>Title</td><td>Genre</td><td>Rating</td>";
 while ($row = mysql_fetch_row($rs)) {
     {
-    
     echo "<tr>";
     echo "<td> $row[0] </td>";
     echo "<td> $row[1] </td>";
@@ -61,7 +53,7 @@ if (!$rs) {
     trigger_error(mysql_error(), E_USER_ERROR); 
 } else {
 } 
-echo "<br /><br /> Shows";
+echo "<br /><br /><h4>Shows</h4>";
 echo "<table><td>show_id</td><td>movie_id</td><td>Start</td><td>End</td><td>Hall no.</td>";
 while ($row = mysql_fetch_row($rs)) {
     {
@@ -83,7 +75,7 @@ if (!$rs) {
     trigger_error(mysql_error(), E_USER_ERROR); 
 } else {
 } 
-echo "<br /><br /> Tickets";
+echo "<br /><br /><h4>Tickets</h4>";
 echo "<table><td>ticket_id</td><td>price</td><td>show_id</td><td>seat_no</td>";
 while ($row = mysql_fetch_row($rs)) {
     {
@@ -101,10 +93,10 @@ echo "</div>";
 
 mysql_close();
 
-?><br />
+?><br/>
 <div style="display:inline;float:right">
 <form method="post" action="add_movie.php">
-<table width="400" border="0" cellspacing="1" cellpadding="2">
+<table class="table-condensed">
 <tr>
 <td width="100">Movie Name</td>
 <td><input name="movie_name" type="text" id="movie_name"></td>
@@ -120,7 +112,7 @@ mysql_close();
 <tr>
 <td width="100"> </td>
 <td>
-<input name="add" type="submit" id="add" value="Add Movie">
+<input name="add" class="btn btn-info btn-block" type="submit" id="add" value="Add Movie">
 </td>
 </tr>
 </table>
@@ -129,7 +121,7 @@ mysql_close();
 
 
 <form method="post" action="add_ticket.php">
-<table width="400" border="0" cellspacing="1" cellpadding="2">
+<table class="table-condensed">
 <tr>
 <td width="100">Price</td>
 <td><input name="price" type="text" id="price"></td>
@@ -143,16 +135,16 @@ mysql_close();
 <td><input name="seat_no" type="text" id="seat_no"></td>
 </tr>
 <tr>
-<td width="100"> </td>
+<td width="100"></td>
 <td>
-<input name="add" type="submit" id="add" value="Add Ticket">
+<input name="add" class="btn btn-info btn-block span2" type="submit" id="add" value="Add Ticket">
 </td>
 </tr>
 </table>
 </form>
 
 <form method="post" action="add_show.php">
-<table width="400" border="0" cellspacing="1" cellpadding="2">
+<table class="table-condensed">
 <tr>
 <td width="100">movie id</td>
 <td><input name="movie_id" type="text" id="movie_id"></td>
@@ -172,7 +164,7 @@ mysql_close();
 <tr>
 <td width="100"> </td>
 <td>
-<input name="add" type="submit" id="add" value="Add Show">
+<input name="add" class="btn btn-info btn-block" type="submit" id="add" value="Add Show">
 </td>
 </tr>
 </table>
