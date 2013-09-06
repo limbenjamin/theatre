@@ -11,11 +11,11 @@ if(! $conn )
 }
 
 
-	$price = ($_POST['price']);
-	$show_id = ($_POST['show_id']);
-	$seat_no = $_POST['seat_no'];
+	$hallID = ($_POST['hallID']);
+	$cinemaID = ($_POST['cinemaID']);
+	$capacity = $_POST['capacity'];
 
-$sql = "INSERT INTO `theatre`.`ticket` (`ticket_id`, `price`, `show_id`, `seat_no`) VALUES (NULL, '$price', '$show_id', '$seat_no');";
+$sql = "INSERT INTO `theatre2`.`hall` (`hallID`, `cinemaID`, `capacity`) VALUES ('$hallID', '$cinemaID', '$capacity');";
 
 mysql_select_db('movie');
 $retval = mysql_query( $sql, $conn );
