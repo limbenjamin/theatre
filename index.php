@@ -107,7 +107,6 @@ while ($row = mysql_fetch_row($rs)) {
     echo "<td> $row[0] </td>";
     echo "<td> $row[1] </td>";
     echo "<td> $row[2] </td>";
-    echo "<td> $row[3] </td>";
     echo "<td> $row[4] </td>";
     echo "<td> $row[5] </td>";
     echo "<td> $row[6] </td>";
@@ -118,6 +117,54 @@ while ($row = mysql_fetch_row($rs)) {
     }
 }
 echo "</table>";
+$query_ticket = "SELECT * FROM `cinema`";
+$rs = mysql_query($query_ticket);
+if (!$rs) {
+    echo "Could not execute query: $query";
+    trigger_error(mysql_error(), E_USER_ERROR); 
+} else {
+} 
+echo "<br /><br /><h4>Cinemas</h4>";
+echo "<table><td>cinemaID</td><td>cinemaName</td><td>address</td><td>telNo</td><td>manager</td>";
+while ($row = mysql_fetch_row($rs)) {
+    {
+    
+    echo "<tr>";
+    echo "<td> $row[0] </td>";
+    echo "<td> $row[1] </td>";
+    echo "<td> $row[2] </td>";
+    echo "<td> $row[3] </td>";
+    echo "<td> $row[4] </td>";
+    echo "</tr>";
+    }
+}
+echo "</table>";
+
+
+$query_ticket = "SELECT * FROM `customer`";
+$rs = mysql_query($query_ticket);
+if (!$rs) {
+    echo "Could not execute query: $query";
+    trigger_error(mysql_error(), E_USER_ERROR); 
+} else {
+} 
+echo "<br /><br /><h4>Customer</h4>";
+echo "<table><td>customerID</td><td>customerName</td><td>email</td><td>password</td><td>phone</td>";
+while ($row = mysql_fetch_row($rs)) {
+    {
+    
+    echo "<tr>";
+    echo "<td> $row[0] </td>";
+    echo "<td> $row[1] </td>";
+    echo "<td> $row[2] </td>";
+    echo "<td> $row[3] </td>";
+    echo "<td> $row[4] </td>";
+    echo "</tr>";
+    }
+}
+echo "</table>";
+
+
 echo "</div>";
 
 mysql_close();
@@ -227,21 +274,107 @@ mysql_close();
 <form method="post" action="add_ticket.php">
 <table class="table-condensed">
 <tr>
-<td width="100">Price</td>
+<td width="100">ticketID</td>
+<td><input name="ticketID" type="text" id="ticketID"></td>
+</tr>
+<tr>
+<td width="100">customerID</td>
+<td><input name="customerID" type="text" id="customerID"></td>
+</tr>
+<tr>
+<td width="100">showID</td>
+<td><input name="showID" type="text" id="showID"></td>
+</tr>
+<tr>
+<td width="100">seatNo</td>
+<td><input name="seatNo" type="text" id="seatNo"></td>
+</tr>
+<tr>
+<td width="100">price</td>
 <td><input name="price" type="text" id="price"></td>
 </tr>
 <tr>
-<td width="100">Show id</td>
-<td><input name="show_id" type="text" id="show_id"></td>
+<td width="100">concession</td>
+<td><input name="concession" type="text" id="concession"></td>
 </tr>
 <tr>
-<td width="100">Seat no.</td>
-<td><input name="seat_no" type="text" id="seat_no"></td>
+<td width="100">paid</td>
+<td><input name="paid" type="text" id="paid"></td>
+</tr>
+<tr>
+<td width="100">bookDateTime</td>
+<td><input name="bookDateTime" type="text" id="bookDateTime"></td>
+</tr>
+<tr>
+<td width="100">paidDateTime</td>
+<td><input name="paidDateTime" type="text" id="paidDateTime"></td>
 </tr>
 <tr>
 <td width="100"></td>
 <td>
 <input name="add" class="btn btn-info btn-block span2" type="submit" id="add" value="Add Ticket">
+</td>
+</tr>
+</table>
+</form>
+
+<form method="post" action="add_cinema.php">
+<table class="table-condensed">
+<tr>
+<td width="100">cinemaID</td>
+<td><input name="cinemaID" type="text" id="cinemaID"></td>
+</tr>
+<tr>
+<td width="100">cinemaName</td>
+<td><input name="cinemaName" type="text" id="cinemaName"></td>
+</tr>
+<tr>
+<td width="100">address</td>
+<td><input name="address" type="text" id="address"></td>
+</tr>
+<tr>
+<td width="100">telNo</td>
+<td><input name="telNo" type="text" id="telNo"></td>
+</tr>
+<tr>
+<td width="100">manager</td>
+<td><input name="manager" type="text" id="manager"></td>
+</tr>
+<tr>
+<td width="100"></td>
+<td>
+<input name="add" class="btn btn-info btn-block span2" type="submit" id="add" value="Add Cinema">
+</td>
+</tr>
+</table>
+</form>
+
+<form method="post" action="add_customer.php">
+<table class="table-condensed">
+<tr>
+<td width="100">customerID</td>
+<td><input name="customerID" type="text" id="customerID"></td>
+</tr>
+<tr>
+<td width="100">customerName</td>
+<td><input name="customerName" type="text" id="customerName"></td>
+</tr>
+<tr>
+<td width="100">email</td>
+<td><input name="email" type="text" id="email"></td>
+</tr>
+<tr>
+<td width="100">password</td>
+<td><input name="password" type="text" id="password"></td>
+</tr>
+<tr>
+<td width="100">phone</td>
+<td><input name="phone" type="text" id="phone"></td>
+</tr>
+<tr>
+<td width="100"></td>
+<td>
+<input name="add" class="btn btn-info btn-block span2" type="submit" id="add" value="Add Customer">
 </td>
 </tr>
 </table>
