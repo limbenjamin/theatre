@@ -31,6 +31,6 @@ if(isset($_POST['add']))
 else
 {
 }
-header("Location: admin.php");
+header("Location: index.php");
 die();
 ?>

@@ -3,7 +3,7 @@ if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
 $dbuser = 'webuser';
-$dbpass = '';
+$dbpass = 'password';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 if(! $conn )
 {
@@ -11,14 +11,13 @@ if(! $conn )
 }
 
 
-	$cinemaID = ($_POST['cinemaID']);
 	$cinemaName = ($_POST['cinemaName']);
 	$address = $_POST['address'];
 	$telNo = $_POST['telNo'];
 	$manager = $_POST['manager'];
 
 
-$sql = "INSERT INTO `theatre2`.`cinema` (`cinemaID`, `cinemaName`, `address`, `telNo`, `manager`) VALUES ('$cinemaID', '$cinemaName', '$address', '$telNo', '$manager');";
+$sql = "INSERT INTO `theatre`.`cinema` (`cinemaID`, `cinemaName`, `address`, `telNo`) VALUES (null, '$cinemaName', '$address', '$telNo');";
 
 mysql_select_db('movie');
 $retval = mysql_query( $sql, $conn );
@@ -32,4 +31,5 @@ mysql_close($conn);
 else
 {
 }
+header("Location: admin.php");
 ?>

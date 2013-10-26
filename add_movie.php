@@ -3,7 +3,7 @@ if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
 $dbuser = 'webuser';
-$dbpass = '';
+$dbpass = 'password';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 if(! $conn )
 {
@@ -11,7 +11,6 @@ if(! $conn )
 }
 
 
-	$movieID = ($_POST['movieID']);
 	$movieName = ($_POST['movieName']);
 	$year = ($_POST['year']);
 	$genre = ($_POST['genre']);
@@ -19,7 +18,7 @@ if(! $conn )
 	$director = $_POST['director'];
 	$rating = $_POST['rating'];
 
-$sql = "INSERT INTO `theatre2`.`movie` (`movieID`, `movieName`, `year`, `genre`, `studio`, `director`, `rating`) VALUES ('$movieID', '$movieName', '$year', '$genre', '$studio', '$director', '$rating');";
+$sql = "INSERT INTO `theatre`.`movie` (`movieID`, `movieName`, `year`, `genre`, `studio`, `director`, `rating`) VALUES (null, '$movieName', '$year', '$genre', '$studio', '$director', '$rating');";
 
 mysql_select_db('movie');
 $retval = mysql_query( $sql, $conn );
@@ -33,4 +32,5 @@ mysql_close($conn);
 else
 {
 }
+header("Location: admin.php");
 ?>

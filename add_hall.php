@@ -3,19 +3,17 @@ if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
 $dbuser = 'webuser';
-$dbpass = '';
+$dbpass = 'password';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 if(! $conn )
 {
   die('Could not connect: ' . mysql_error());
 }
 
-
-	$hallID = ($_POST['hallID']);
 	$cinemaID = ($_POST['cinemaID']);
 	$capacity = $_POST['capacity'];
 
-$sql = "INSERT INTO `theatre2`.`hall` (`hallID`, `cinemaID`, `capacity`) VALUES ('$hallID', '$cinemaID', '$capacity');";
+$sql = "INSERT INTO `theatre`.`hall` (`hallID`, `cinemaID`, `capacity`) VALUES (null, '$cinemaID', '$capacity');";
 
 mysql_select_db('movie');
 $retval = mysql_query( $sql, $conn );
@@ -29,4 +27,5 @@ mysql_close($conn);
 else
 {
 }
+header("Location: admin.php");
 ?>
