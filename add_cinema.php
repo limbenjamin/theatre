@@ -11,14 +11,13 @@ if(! $conn )
 }
 
 
-	$movieName = ($_POST['movieName']);
-	$year = ($_POST['year']);
-	$genre = ($_POST['genre']);
-	$studio = $_POST['studio'];
-	$director = $_POST['director'];
-	$rating = $_POST['rating'];
+	$cinemaName = ($_POST['cinemaName']);
+	$address = $_POST['address'];
+	$telNo = $_POST['telNo'];
+	$manager = $_POST['manager'];
 
-$sql = "INSERT INTO `theatre`.`movie` (`movieID`, `movieName`, `year`, `genre`, `studio`, `director`, `rating`) VALUES (null, '$movieName', '$year', '$genre', '$studio', '$director', '$rating');";
+
+$sql = "INSERT INTO `theatre`.`cinema` (`cinemaID`, `cinemaName`, `address`, `telNo`) VALUES (null, '$cinemaName', '$address', '$telNo');";
 
 mysql_select_db('movie');
 $retval = mysql_query( $sql, $conn );

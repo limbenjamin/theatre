@@ -10,15 +10,10 @@ if(! $conn )
   die('Could not connect: ' . mysql_error());
 }
 
+	$cinemaID = ($_POST['cinemaID']);
+	$capacity = $_POST['capacity'];
 
-	$movieName = ($_POST['movieName']);
-	$year = ($_POST['year']);
-	$genre = ($_POST['genre']);
-	$studio = $_POST['studio'];
-	$director = $_POST['director'];
-	$rating = $_POST['rating'];
-
-$sql = "INSERT INTO `theatre`.`movie` (`movieID`, `movieName`, `year`, `genre`, `studio`, `director`, `rating`) VALUES (null, '$movieName', '$year', '$genre', '$studio', '$director', '$rating');";
+$sql = "INSERT INTO `theatre`.`hall` (`hallID`, `cinemaID`, `capacity`) VALUES (null, '$cinemaID', '$capacity');";
 
 mysql_select_db('movie');
 $retval = mysql_query( $sql, $conn );

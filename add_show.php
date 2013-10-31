@@ -2,21 +2,21 @@
 if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
+$dbuser = 'webuser';
+$dbpass = 'password';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 if(! $conn )
 {
   die('Could not connect: ' . mysql_error());
 }
 
+	$movieID = ($_POST['movieID']);
+	$hallID = ($_POST['hallID']);
+	$duration = ($_POST['duration']);
+	$startTime = ($_POST['startTime']);
+	$endTime = $_POST['endTime'];
 
-	$movie_id = ($_POST['movie_id']);
-	$start_time = ($_POST['start_time']);
-	$end_time = $_POST['end_time'];
-	$hall = $_POST['hall'];
-
-$sql = "INSERT INTO `theatre`.`shows` (`show_id`, `movie_id`, `start_time`, `end_time`, `hall`) VALUES (NULL, '$movie_id', '$start_time', '$end_time', '$hall');";
+$sql = "INSERT INTO `theatre`.`shows` (`showID`, `movieID`, `hallID`, `duration`, `startTime`, `endTime`) VALUES (null, '$movieID', '$hallID', '$duration', '$startTime', `endTime`);";
 
 mysql_select_db('movie');
 $retval = mysql_query( $sql, $conn );
@@ -30,4 +30,5 @@ mysql_close($conn);
 else
 {
 }
+header("Location: admin.php");
 ?>

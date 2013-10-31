@@ -4,11 +4,8 @@
 <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="assets/css/style.css" rel="stylesheet">
 <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-</head>
 <body>
     <header class="headertop needhead" id="header-section">
-        <div class="innerbg">
-        <div class="leftbg"></div>
         <div class="nav-top"> 
             <div class="navbar navbar-fixed-top navbar-inverse" id="top-nav"> 
               <div class="navbar-inner">
@@ -26,29 +23,40 @@
                 </div>
               </div>
             </div>
-        </div>
-    <div class="hero-unit">
-        <div class="container">
-            <div class="row-fluid">
-                <div class="text-center">
-                        <h1 class="">Welcome, movie-goers!</h1>
-                        <h2 class="text-center">
-                        <span class="get-it">Book your movie tickets online now</span>
-                        </h2>
-                    <hr class="half">
-                    <div class="camein">
-                        <p class="">
-                            <a href="./login.php" class="btn btn-large btn-info btn-block-third" title="">LOG IN</a>
-                            <i class="or">- or -</i>
-                            <a href="./register.php" class="btn btn-large btn-block-third btn-warning" title="">REGISTER</a>
-                        </p>
-                    </div>  
-                </div>  
-            </div>  
+        </div>    
+    </header>	
+<br />
+<section>
+<div class="panel first">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <header class="page-header">
+                    <h3>Login</h3>             
+                </header>
+                <div class="well">
+    				<form method="post" action="check_customer.php">
+    				<table class="table-condensed">
+    				<tr>
+    				<td width="100">email</td>
+    				<td><input required name="email" type="email" id="email"></td>
+    				</tr>
+    				<tr>
+    				<td width="100">password</td>
+    				<td><input required name="password" type="password" id="password"></td>
+    				</tr>
+    				<tr>
+    				<td width="100"></td>
+    				<td><input name="check" class="btn btn-info btn-block span2" type="submit" id="check" value="Login"></td>
+    				</tr>
+    				</table>
+    				</form>
+                </div>
+            </div>      
         </div>
     </div>
 </div>
-</header>
+</section>
 <footer class="footer">
   <div class="container">
     <h5 align="center">Copyright &copy; 2013. CS2102 Group 42.</h5>
