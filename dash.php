@@ -38,8 +38,8 @@ $cid = ($_GET["id"]); ?>
 			<div class="well">
 		    <h3 class="folio-title"><span class="main-color"><i class="fa-icon-search"></i> Search for Movies</span></h3>
 			<?php echo'<form method="post" action="dash2.php?id='.$cid.'">'; ?>
-				<label>Movie Title</label> <input type="text" required name="title" class="span3"/><br>
-				<label>Cinema</label> <input type="text" required name="cinema" class="span3"/><br>
+				<label>Movie Title</label> <input type="text" id="title" name="title" class="span3"/><br>
+				<label>Cinema</label> <input type="text" id="cinema" name="cinema" class="span3"/><br>
 	       		<input name="search" class="btn btn-info" type="submit" id="search" value="Submit">
 	        </form>
             </div>				
@@ -51,8 +51,8 @@ $cid = ($_GET["id"]); ?>
 			<tr>
 			<th>Ticket ID</th>
 			<th>Show ID</th>
-			<th>seatNo</th>
-			<th>price</th>
+			<th>Seat No</th>
+			<th>Price</th>
 			<th>concession</th>
 			<th>Booking Date</th>
 			<th>Payment Date</th>
@@ -96,5 +96,23 @@ $cid = ($_GET["id"]); ?>
 </div>
 </section>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('.cb').mousedown(function() {
+    if (!$(this).is(':checked')) {
+        this.checked = confirm("Are you sure?");
+        $(this).trigger("change");
+        $action = this.id;
+        $id = this.value;
+        $cid = <?php echo $cid; ?>;
+        if ($action == "pay"){
+        	window.location.href = "./pay_client.php?cid="+$cid+"&id="+$id;
+        }
+        else{
+        	window.location.href = "./cancel_client.php?cid="+$cid+"&id="+$id;
+        }
+
+    }
+});
+</script>
 </body>
 </html>
