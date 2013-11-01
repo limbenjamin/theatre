@@ -2,18 +2,26 @@
 if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
-$dbuser = 'webuser';
-$dbpass = 'password';
+$dbuser = 'root';
+$dbpass = 'dbpassword';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 if(! $conn )
 {
   die('Could not connect: ' . mysql_error());
 }
-
+	$hallID = ($_POST['hallID']);
 	$cinemaID = ($_POST['cinemaID']);
 	$capacity = $_POST['capacity'];
 
-$sql = "INSERT INTO `theatre`.`hall` (`hallID`, `cinemaID`, `capacity`) VALUES (null, '$cinemaID', '$capacity');";
+	if (is_null($hallID)){
+		$sql = "INSERT INTO `theatre`.`hall` (`hallID`, `cinemaID`, `capacity`) VALUES (null, '$cinemaID', '$capacity');";
+	}
+	else{
+		$sql = "UPDATE `theatre`.hall SET cinemaID='$cinemaID', capacity='$capacity'
+		 WHERE hallID='$hallID'";
+	}
+
+
 
 mysql_select_db('movie');
 $retval = mysql_query( $sql, $conn );

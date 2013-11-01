@@ -2,15 +2,15 @@
 if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
-$dbuser = 'webuser';
-$dbpass = 'password';
+$dbuser = 'root';
+$dbpass = 'dbpassword';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 if(! $conn )
 {
   die('Could not connect: ' . mysql_error());
 }
 
-
+	$ticketID = ($_POST['ticketID']);
 	$customerID = ($_POST['customerID']);
 	$showID = $_POST['showID'];
 	$seatNo = ($_POST['seatNo']);
@@ -18,11 +18,16 @@ if(! $conn )
 	$concession = ($_POST['concession']);
 	$paid = $_POST['paid'];
 	$date = date('Y-m-d H:i:s');
+	if (is_null($ticketID)){
+		$sql = "INSERT INTO `theatre`.`ticket` (`ticketID`, `cID`, `showID`, `seatNo`, `price`, `concession`, `paid`, `bookDateTime`, `paidDateTime`) 
+				VALUES (null, '$customerID', '$showID','$seatNo', '$price', '$concession', '$paid', '$date', null);";
+	}
+	else{
+		$sql = "UPDATE `theatre`.ticket SET cID='$customerID', showID='$showID', seatNo='$seatNo', price='$price',concession='$concession', paid='$paid'
+		 WHERE ticketID='$ticketID'";
+	}
 
-$sql = "INSERT INTO `theatre`.`ticket` (`ticketID`, `cID`, `showID`, `seatNo`, `price`, `concession`, `paid`, `bookDateTime`, `paidDateTime`) 
-		VALUES (null, '$customerID', '$showID','$seatNo', '$price', '$concession', '$paid', '$date', null);";
 
-mysql_select_db('movie');
 $retval = mysql_query( $sql, $conn );
 if(! $retval )
 {

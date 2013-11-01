@@ -33,7 +33,7 @@ if(isset($_POST['search']))
 	{
 	$title = $_POST['title'];
 	$cinema = $_POST['cinema'];
-	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'password');
+	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$cid = ($_GET["id"]);
