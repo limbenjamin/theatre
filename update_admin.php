@@ -5,7 +5,7 @@
 	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-
+      date_default_timezone_set('Asia/Singapore');
 
 	$action = ($_GET["id"]);
 	$value = ($_GET["value"]);
@@ -151,11 +151,11 @@
             </tr>
             <tr>
             <td width="100">startTime</td>
-            <td><input name="startTime" type="text" id="startTime"value=<?php echo $row[4]; ?>> </td>
+            <td><input name="startTime" type="text" id="startTime"value="<?php echo($row[4]);  ?>"> </td>
             </tr>
             <tr>
             <td width="100">endTime</td>
-            <td><input name="endTime" type="text" id="endTime"value=<?php echo $row[5]; ?>> </td>
+            <td><input name="endTime" type="text" id="endTime"value="<?php echo $row[5]; ?>"> </td>
             </tr>
             <tr>
             <td width="100"> </td>

@@ -29,7 +29,7 @@ if(! $conn )
 	}
 
 
-mysql_select_db('movie');
+
 $retval = mysql_query( $sql, $conn );
 if(! $retval )
 {

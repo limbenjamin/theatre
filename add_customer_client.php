@@ -55,7 +55,7 @@
 
 						$sql = "INSERT INTO `theatre`.`customer` (`cID`, `cName`, `email`, `cPw`, `phone`) VALUES (null, '$customerName', '$email', '$password', '$phone');";
 
-						mysql_select_db('movie');
+						
 						$retval = mysql_query( $sql, $conn );
 						if(! $retval )
 						{

@@ -25,7 +25,7 @@ if(! $conn )
 		 WHERE cinemaID='$cinemaID'";
 	}
 
-mysql_select_db('movie');
+
 $retval = mysql_query( $sql, $conn );
 if(! $retval )
 {
