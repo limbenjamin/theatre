@@ -1,7 +1,7 @@
 <?php
 $dbhost = 'localhost';
-$dbuser = 'webuser';
-$dbpass = 'password';
+$dbuser = 'root';
+$dbpass = 'dbpassword';
 $con=mysqli_connect($dbhost, $dbuser, $dbpass,"theatre");
 if(! $con )
 {

@@ -33,7 +33,7 @@ if(isset($_POST['search']))
 	{
 	$title = $_POST['title'];
 	$cinema = $_POST['cinema'];
-	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'password');
+	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$cid = ($_GET["id"]);
@@ -136,9 +136,9 @@ echo "</div>";
 	<tr>
 		<td width="100">Concession</td>
 		<td><fieldset data-role="controlgroup">
-           <label><input type="radio" class="required" name='concession' value='adult' id="adult" />  ADULT</label>
-           <label><input type="radio" name='concession' value='child' id="child" />  CHILD</label>
-           <label><input type="radio" name='concession' value='elderly' id="elderly" />  ELDERLY</label>
+           <label><input type="radio" class="required" name='concession' value='ADULT' id="adult" />  ADULT</label>
+           <label><input type="radio" name='concession' value='CHILD' id="child" />  CHILD</label>
+           <label><input type="radio" name='concession' value='ELDER' id="elderly" />  ELDERLY</label>
             </fieldset>
         </td>
     </tr>        

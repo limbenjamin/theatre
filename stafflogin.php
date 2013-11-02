@@ -4,7 +4,6 @@
 <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="assets/css/style.css" rel="stylesheet">
 <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-</head>
 <body>
     <header class="headertop needhead" id="header-section">
         <div class="nav-top"> 
@@ -25,52 +24,33 @@
               </div>
             </div>
         </div>    
-    </header>
+    </header>	
+<br />
 <section>
 <div class="panel first">
     <div class="container">
         <div class="row">
-            <div class="span5">
+            <div class="span4">
                 <header class="page-header">
-                    <h3>Proccessing...</h3>             
-                </header>    	
-					<?php
-					if(isset($_POST['add']))
-					{
-						$dbhost = 'localhost';
-						$dbuser = 'root';
-						$dbpass = 'dbpassword';
-						$conn = mysql_connect($dbhost, $dbuser, $dbpass);
-						if(! $conn )
-						{
-						  die('Could not connect: ' . mysql_error());
-						}
-
-
-							$customerName = ($_POST['customerName']);
-							$email = $_POST['email'];
-							$password = $_POST['password'];
-							$phone = $_POST['phone'];
-
-
-						$sql = "INSERT INTO `theatre`.`customer` (`cID`, `cName`, `email`, `cPw`, `phone`) VALUES (null, '$customerName', '$email', '$password', '$phone');";
-
-						
-						$retval = mysql_query( $sql, $conn );
-						if(! $retval )
-						{
-						  die('Could not enter data: ' . mysql_error());
-						}
-						echo "<h3>Congrats, $customerName</h3>";
-						echo "<h3>You are successfully registered!</h3>";
-						mysql_close($conn);
-						}
-					else
-					{
-					}
-				    header("Location: index.php");
-					die();
-					?>
+                    <h3>Staff Login</h3>             
+                </header>
+                <div class="well">
+    				<form method="post" action="check_staff.php">
+    				<table class="table-condensed">
+    				<tr>
+    				<td width="100">Username</td>
+    				<td><input required name="user" type="user" id="user"></td>
+    				</tr>
+    				<tr>
+    				<td width="100">password</td>
+    				<td><input required name="password" type="password" id="password"></td>
+    				</tr>
+    				<tr>
+    				<td width="100"></td>
+    				<td><input name="check" class="btn btn-info btn-block span2" type="submit" id="check" value="Login"></td>
+    				</tr>
+    				</table>
+    				</form>
                 </div>
             </div>      
         </div>

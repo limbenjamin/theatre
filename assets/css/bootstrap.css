@@ -1088,9 +1088,9 @@ input[type="email"],
 input[type="url"],
 input[type="search"],
 input[type="tel"],
-input[type="color"] {
+input[type="color"]{
   display: inline-block;
-  height: 25px;
+  height: 20px;
   margin-bottom: 10px;
   font-size: 14px;
   line-height: 20px;
