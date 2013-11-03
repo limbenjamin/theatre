@@ -10,8 +10,8 @@
 <?php
 
 $host = "localhost"; 
-$user = "root";
-$pass = "dbpassword"; 
+$user = "webuser";
+$pass = "j8ldl971"; 
 $db = "theatre";
 $sid = ($_GET["id"]); 
 //if(is_null($sid))

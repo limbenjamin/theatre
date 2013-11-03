@@ -33,7 +33,7 @@ if(isset($_POST['search']))
 	{
 	$title = $_POST['title'];
 	$cinema = $_POST['cinema'];
-	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
+	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'j8ldl971');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$cid = ($_GET["id"]);
@@ -48,16 +48,20 @@ if(isset($_POST['search']))
 			$sth->execute();
 			echo "<br/><br/><h3>Search Results</h3>";
 			echo "<table class='table table-striped'>
+			<thead>
 			<tr>
 			<th>Show ID</th>
 			<th>Movie Name</th>
+			<th>Movie Rating</th>
 			<th>Hall No.</th>
 			<th>Cinema<th>
 			<th>Duration</th>
 			<th>Start Time</th>
 			<th>End Time</th>
 			<th>Seats available</th>
-			</tr>";
+			</tr>
+			</thead>
+			<tbody>";
 			while($row = $sth->fetch(PDO::FETCH_BOTH))  {
 			    echo "<tr>";
 			    $sid = $row[0];
@@ -68,6 +72,7 @@ if(isset($_POST['search']))
 				$sth1->execute();
 				while($row1 = $sth1->fetch(PDO::FETCH_BOTH))  {
 					echo "<td> $row1[1] </td>";
+					echo '<td><span class="rating">'.$row1[6].'</span></td>';
 				}
 				$hid = $row[2];
 			    echo "<td> $hid </td>";
@@ -80,7 +85,7 @@ if(isset($_POST['search']))
 				$cinemaName = $row2[0];
 			    echo "<td> $cinemaName </td>";
 			    echo "<td> $row[3]hr </td>";
-			    echo "<td> $row[4] </td>";
+			    echo '<td><span class="duration">'.$row[4].'</span></td>';
 			    echo "<td> $row[5] </td>";
 			    $sth3 = $db->prepare("SELECT * FROM hall WHERE hallID= :id3");
 				$sth3->bindValue(':id3', $hid);
@@ -112,7 +117,7 @@ if(isset($_POST['search']))
 				echo "<td> $str </td>";
 			    echo "</tr>";
 			}
-			echo "</table>";
+			echo "</tbody></table>";
 		} catch(Exception $ex) {
 		    echo $ex;
 		}
@@ -176,6 +181,40 @@ $('.cb').mousedown(function() {
 
     }
 });
+</script>
+<script>
+function sortTable(table, col, reverse) {
+    var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
+        tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
+        i;
+    reverse = -((+reverse) || -1);
+    tr = tr.sort(function (a, b) { // sort rows
+        return reverse // `-1 *` if want opposite order
+            * (a.cells[col].textContent.trim() // using `.textContent.trim()` for test
+                .localeCompare(b.cells[col].textContent.trim())
+               );
+    });
+    for(i = 0; i < tr.length; ++i) tb.appendChild(tr[i]); // append each row in order
+}
+
+function makeSortable(table) {
+    var th = table.tHead, i;
+    th && (th = th.rows[0]) && (th = th.cells);
+    if (th) i = th.length;
+    else return; // if no `<thead>` then do nothing
+    while (--i >= 0) (function (i) {
+        var dir = 1;
+        th[i].addEventListener('click', function () {sortTable(table, i, (dir = 1 - dir))});
+    }(i));
+}
+
+function makeAllSortable(parent) {
+    parent = parent || document.body;
+    var t = parent.getElementsByTagName('table'), i = t.length;
+    while (--i >= 0) makeSortable(t[i]);
+}
+
+window.onload = function () {makeAllSortable();};
 </script>
 </body>
 </html>
