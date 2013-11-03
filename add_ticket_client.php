@@ -2,10 +2,10 @@
 if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = 'dbpassword';
+$dbuser = 'webuser';
+$dbpass = 'j8ldl971';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
+$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'j8ldl971');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 if(! $conn )

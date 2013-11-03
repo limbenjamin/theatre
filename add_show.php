@@ -2,10 +2,10 @@
 if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = 'dbpassword';
+$dbuser = 'webuser';
+$dbpass = 'j8ldl971';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
+$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'j8ldl971');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 if(! $conn )
@@ -24,7 +24,7 @@ if(! $conn )
 		 die('Start time is after end time. Error');
 
 	//check duration correct
-	if (round((strtotime($endTime) - strtotime($startTime))/(60*60)) != $duration){
+	if ((strtotime($endTime) - strtotime($startTime))/(60*60.0) != $duration){
 		die('Duration is not Correct.');
 	}
 
@@ -42,7 +42,7 @@ if(! $conn )
 			}
 	if (is_null($showID)){
 		$sql = "INSERT INTO `theatre`.`shows` (`showID`, `movieID`, `hallID`, `duration`, `startTime`, `endTime`) 
-		VALUES (null, '$movieID', '$hallID', '$duration', '$startTime', `endTime`);";
+		VALUES (null, '$movieID', '$hallID', '$duration', '$startTime', '$endTime');";
 
 	}
 	else{
