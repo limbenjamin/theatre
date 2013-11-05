@@ -1,5 +1,33 @@
 <html>
+<head>
+<link href="assets/bootstrap.css" rel="stylesheet">
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/admin.css" rel="stylesheet">
+<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+</head>
 <body>
+      <div class="nav-top"> 
+      <div class="navbar navbar-fixed-top navbar-inverse" id="top-nav"> 
+        <div class="navbar-inner">
+          <div class="container"> 
+              <a class="brand" href="./admindash.php">
+              <span><i class="fa-icon-wrench"></i> Popcorn Admin</span></a>
+               <div id="main-nav" class="scroller-spy">
+                  <nav>
+                    <ul class="nav pull-right" id="nav">
+                      <li><a href="./index.php">Logout</a> </li>
+                    </ul>
+                  </nav>
+                </div>          
+          </div>
+        </div>
+      </div>
+      </div>
+<section>
+<div class="container">
+<div class="span4">           
 <?php
 
 	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'j8ldl971');
@@ -19,7 +47,7 @@
 ?>
 				
 	    		<form method="post" action="add_cinema.php">
-	            <table class="table-condensed">
+	            <table class="formtable">
 	            <tr>
 	            <td width="100">cinemaID</td>
 	            <td><input name="cinemaID" type="text" id="cinemaID" value=<?php echo $value; ?> readonly></td>
@@ -39,7 +67,7 @@
 	            <tr>
 	            <td width="100"></td>
 	            <td>
-	            <input name="add" class="btn btn-info btn-block span2" type="submit" id="add" value="Update Cinema">
+	            <input name="add" class="pull-right btn btn-info" type="submit" id="add" value="Update Cinema">
 	            </td>
 	            </tr>
 	            </table>
@@ -54,7 +82,7 @@
 ?>
 				
 	    	<form method="post" action="add_hall.php">
-            <table class="table-condensed">
+            <table class="formtable">
             <tr>
             <td width="100">hallID</td>
             <td><input name="hallID" type="text" id="hallID" value=<?php echo $value; ?> readonly></td>
@@ -70,7 +98,7 @@
             <tr>
             <td width="100"></td>
             <td>
-            <input name="add" class="btn btn-info btn-block span2" type="submit" id="add" value="Update Hall">
+            <input name="add" class="pull-right btn btn-info" type="submit" id="add" value="Update Hall">
             </td>
             </tr>
             </table>
@@ -85,7 +113,7 @@
 ?>
 				
 	    	<form method="post" action="add_movie.php">
-            <table class="table-condensed">
+            <table class="formtable">
             <tr>
             <td width="100">movieID</td>
             <td><input name="movieID" type="text" id="movieID" value=<?php echo $value; ?> readonly></td>
@@ -117,7 +145,7 @@
             <tr>
             <td width="100"> </td>
             <td>
-            <input name="add" class="btn btn-info btn-block" type="submit" id="add" value="Update Movie">
+            <input name="add" class="pull-right btn btn-info" type="submit" id="add" value="Update Movie">
             </td>
             </tr>
             </table>
@@ -132,7 +160,7 @@
 ?>
 				
 	    	<form method="post" action="add_show.php">
-            <table class="table-condensed">
+            <table class="formtable">
             <tr>
             <td width="100">showID</td>
             <td><input name="showID" type="text" id="showID" value=<?php echo $value; ?> readonly></td>
@@ -160,7 +188,7 @@
             <tr>
             <td width="100"> </td>
             <td>
-            <input name="add" class="btn btn-info btn-block" type="submit" id="add" value="Update Show">
+            <input name="add" class="pull-right btn btn-info" type="submit" id="add" value="Update Show">
             </td>
             </tr>
             </table>
@@ -174,7 +202,7 @@
 			while($row = $sth->fetch(PDO::FETCH_BOTH)) {
 ?>
 	    	<form method="post" action="add_customer.php">
-            <table class="table-condensed">
+            <table class="formtable">
             <tr>
             <tr>
             <td width="100">cID</td>
@@ -198,7 +226,7 @@
             <tr>
             <td width="100"></td>
             <td>
-            <input name="add" class="btn btn-info btn-block span2" type="submit" id="add" value="Update Customer">
+            <input name="add" class="pull-right btn btn-info" type="submit" id="add" value="Update Customer">
             </td>
             </tr>
             </table>
@@ -213,7 +241,7 @@
 ?>
 				
 	    	<form method="post" action="add_ticket.php">
-            <table class="table-condensed">
+            <table class="formtable">
             <tr>
             <tr>
             <td width="100">ticketID</td>
@@ -245,7 +273,7 @@
             <tr>
             <td width="100"></td>
             <td>
-            <input name="add" class="btn btn-info btn-block span2" type="submit" id="add" value="Update Ticket">
+            <input name="add" class="pull-right btn btn-info" type="submit" id="add" value="Update Ticket">
             </td>
             </tr>
             </table>
@@ -259,5 +287,8 @@
 
 
 ?>
+</div>
+</div>
+</section>
 </body>
 </html>
