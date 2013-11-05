@@ -1,7 +1,6 @@
 <?php
 if(isset($_POST['check']))
 	{
-
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'j8ldl971');

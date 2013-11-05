@@ -55,7 +55,6 @@ $cid = ($_GET["id"]); ?>
 			<th>Price</th>
 			<th>concession</th>
 			<th>Booking Date</th>
-			<th>Payment Date</th>
 			<th>Pay</th>
 			<th>Cancel</th>
 			</tr>";
@@ -73,14 +72,13 @@ $cid = ($_GET["id"]); ?>
 					    echo "<td> $$row[4].00 </td>";
 					    echo "<td> $row[5] </td>";
 					    echo "<td> $row[7] </td>";
-					    echo "<td> $row[8] </td>";
 					    if ($paid == 1){
-					    	echo '<td>Paid</td>';
+					    	echo "<td><span style='color: green'>PAID</span> on <br/>$row[8]</td>";
 					    	echo '<td>Not Allowed</td>';
 					    }
 					    else{
-					    	echo '<td> <input type="checkbox" value='.$tid.' id="pay" class="cb"> </td>';
-					    	echo '<td> <input type="checkbox" value='.$tid.' id="cancel" class="cb"> </td>';
+					    	echo '<td><span style="color: red">Pay Now:</span> <input type="checkbox" value='.$tid.' id="pay" class="cb"> </td>';
+					    	echo '<td><span style="color: red">Cancel Now:</span> <input type="checkbox" value='.$tid.' id="cancel" class="cb"> </td>';
 					    }
 					    echo "</tr>";
 					}

@@ -28,6 +28,10 @@
 		position:relative;
 		width: 100%;
 	}
+
+	.formtable td {
+    	border-top: none;
+	}
 	
 /*************************** TOP ******************************/
 	.navbar {

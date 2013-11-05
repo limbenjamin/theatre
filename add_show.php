@@ -1,3 +1,33 @@
+<html>
+<head>
+<link href="assets/bootstrap.css" rel="stylesheet">
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/admin.css" rel="stylesheet">
+<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+      <div class="nav-top"> 
+      <div class="navbar navbar-fixed-top navbar-inverse" id="top-nav"> 
+        <div class="navbar-inner">
+          <div class="container"> 
+              <a class="brand" href="./admindash.php">
+              <span><i class="fa-icon-wrench"></i> Popcorn Admin</span></a>
+               <div id="main-nav" class="scroller-spy">
+                  <nav>
+                    <ul class="nav pull-right" id="nav">
+                      <li><a href="./index.php">Logout</a> </li>
+                    </ul>
+                  </nav>
+                </div>          
+          </div>
+        </div>
+      </div>
+      </div>
+<section>
+<div class="container">
+<div class="span6"> 
 <?php
 if(isset($_POST['add']))
 {
@@ -38,6 +68,8 @@ if(! $conn )
 				$retval = datesOverlap($row[0],$row[1],$startTime,$endTime);
 				if ($retval == 1){
 					die('Overlap in dates');
+					echo "<h3>Whoops, there's an overlap in the start datetime and end datetime with another show at the same venue!</h3>";
+					echo "<h4>Please add a valid time range with no clashes!</h4>";
 				}
 			}
 	if (is_null($showID)){
@@ -56,14 +88,12 @@ if(! $retval )
 {
   die('Could not enter data: ' . mysql_error());
 }
-echo "Entered data successfully\n";
+echo "<h3>Entered data successfully</h3>";
 mysql_close($conn);
 }
 else
 {
 }
-header("Location: admin.php");
-
 function datesOverlap($start_one,$end_one,$start_two,$end_two) {
 
    if($start_one <= $end_two && $end_one >= $start_two) { //If the dates overlap
@@ -72,7 +102,9 @@ function datesOverlap($start_one,$end_one,$start_two,$end_two) {
 
    return 0; //Return 0 if there is no overlap
 }
-
-
-
 ?>
+</div>
+</div>
+</section>
+</body>
+</html>
