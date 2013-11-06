@@ -29,7 +29,7 @@
 <section>
 <div class="container">
 <?php
-$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'j8ldl971');
+$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'dbpassword');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $cid = ($_GET["id"]); ?>	
@@ -40,9 +40,10 @@ $cid = ($_GET["id"]); ?>
 			<?php echo'<form method="post" action="dash2.php?id='.$cid.'">'; ?>
 				<label>Movie Title</label> <input type="text" id="title" name="title" class="span3"/><br>
 				<label>Cinema</label> <input type="text" id="cinema" name="cinema" class="span3"/><br>
+				<label>Date</label> <input type="text" id="date" name="date" class="span3"/><br>
 	       		<input name="search" class="btn btn-info" type="submit" id="search" value="Submit">
 	        </form>
-            </div>				
+            </div>		
 		</div>
 		<div class="span8">	
 			<?php
@@ -50,10 +51,11 @@ $cid = ($_GET["id"]); ?>
 			echo "<table class='table table-striped'>
 			<tr>
 			<th>Ticket ID</th>
-			<th>Show ID</th>
-			<th>Seat No</th>
+			<th>Movie Name</th>
+			<th>Hall No.</th>
+			<th>Seat No.</th>
 			<th>Price</th>
-			<th>concession</th>
+			<th>Concession</th>
 			<th>Booking Date</th>
 			<th>Pay</th>
 			<th>Cancel</th>
@@ -67,7 +69,14 @@ $cid = ($_GET["id"]); ?>
 					    $tid = $row[0];
 					    $paid = $row[6];
 					    echo "<td> $tid </td>";
-					    echo "<td> $row[2] </td>";
+					    $sid = $row[2];
+					    $sth = $db->prepare("SELECT * FROM shows,movie WHERE showID= :id AND shows.movieID = movie.movieID");
+						$sth->bindValue(':id', $sid);
+						$sth->execute();
+					    while ($row2 = $sth->fetch(PDO::FETCH_BOTH)){
+							echo "<td> $row2[movieName] </td>";
+							echo "<td> $row2[2] </td>";
+						}
 					    echo "<td> $row[3] </td>";
 					    echo "<td> $$row[4].00 </td>";
 					    echo "<td> $row[5] </td>";
@@ -112,5 +121,6 @@ $('.cb').mousedown(function() {
     }
 });
 </script>
+
 </body>
 </html>
