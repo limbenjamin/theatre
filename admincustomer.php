@@ -43,7 +43,7 @@
 
     $host = "localhost"; 
     $user = "webuser";
-    $pass = "j8ldl971"; 
+    $pass = "dbpassword"; 
     $db = "theatre";
     $sid = ($_GET["id"]); 
     //if(is_null($sid))

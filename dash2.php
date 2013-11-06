@@ -33,19 +33,42 @@ if(isset($_POST['search']))
 	{
 	$title = $_POST['title'];
 	$cinema = $_POST['cinema'];
-	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'j8ldl971');
+	$date = $_POST['date'];
+	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'dbpassword');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$cid = ($_GET["id"]);
 	try {
-			$sth = $db->prepare("SELECT * 
-				FROM shows, movie, hall, cinema
-				WHERE movieName LIKE '%$title%' 
-				AND shows.movieID=movie.movieID
-				AND shows.hallID=hall.hallID
-				AND hall.cinemaID = cinema.cinemaID
-				AND cinemaName LIKE '%$cinema%'");
-			$sth->execute();
+			if (empty($date)){
+				$currdate = date("Y-m-d h:i:s");
+				$sth = $db->prepare("SELECT * 
+					FROM shows, movie, hall, cinema
+					WHERE movieName LIKE '%$title%' 
+					AND shows.movieID=movie.movieID
+					AND shows.startTime BETWEEN :date0 AND '2014-12-31 23:59:00'
+					AND shows.hallID=hall.hallID
+					AND hall.cinemaID = cinema.cinemaID
+					AND cinemaName LIKE '%$cinema%'");
+				$sth->bindValue(':date0', $currdate);
+				$sth->execute();
+			}
+			else{
+					$date0 = $date . " 00:00:00";
+					$date1 = $date . " 23:59:00";
+					echo $date0;
+					echo $date1;
+					$sth = $db->prepare("SELECT * 
+					FROM shows, movie, hall, cinema
+					WHERE movieName LIKE '%$title%' 
+					AND shows.movieID=movie.movieID
+					AND shows.startTime BETWEEN :date0 AND :date1
+					AND shows.hallID=hall.hallID
+					AND hall.cinemaID = cinema.cinemaID
+					AND cinemaName LIKE '%$cinema%'");
+				$sth->bindValue(':date0', $date0);
+				$sth->bindValue(':date1', $date1);
+				$sth->execute();
+			}
 			echo "<br/><br/><h3>Search Results</h3>";
 			echo "<table class='table table-striped'>
 			<thead>
@@ -55,7 +78,7 @@ if(isset($_POST['search']))
 			<th>Movie Rating</th>
 			<th>Hall No.</th>
 			<th>Cinema<th>
-			<th>Duration</th>
+			<th>Duration(hr)</th>
 			<th>Start Time</th>
 			<th>End Time</th>
 			<th>Seats available</th>
@@ -84,7 +107,7 @@ if(isset($_POST['search']))
 				}
 				$cinemaName = $row2[0];
 			    echo "<td> $cinemaName </td>";
-			    echo "<td> $row[3]hr </td>";
+			    echo "<td> $row[3] </td>";
 			    echo '<td><span class="duration">'.$row[4].'</span></td>';
 			    echo "<td> $row[5] </td>";
 			    $sth3 = $db->prepare("SELECT * FROM hall WHERE hallID= :id3");
