@@ -1,6 +1,6 @@
 <?php
 $dbhost = 'localhost';
-$dbuser = 'webuser';
+$dbuser = 'root';
 $dbpass = 'dbpassword';
 $con=mysqli_connect($dbhost, $dbuser, $dbpass,"theatre");
 if(! $con )
@@ -26,7 +26,7 @@ if(! $con )
 		mysqli_close($con);
 	}
 	else if ($id < 5000){
-		mysqli_query($con,"DELETE FROM customer WHERE customerID='$id'");
+		mysqli_query($con,"DELETE FROM customer WHERE cID='$id'");
 		mysqli_close($con);
 	}
 	else{

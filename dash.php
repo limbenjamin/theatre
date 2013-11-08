@@ -29,7 +29,7 @@
 <section>
 <div class="container">
 <?php
-$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'dbpassword');
+$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $cid = ($_GET["id"]); ?>	
@@ -70,10 +70,10 @@ $cid = ($_GET["id"]); ?>
 					    $paid = $row[6];
 					    echo "<td> $tid </td>";
 					    $sid = $row[2];
-					    $sth = $db->prepare("SELECT * FROM shows,movie WHERE showID= :id AND shows.movieID = movie.movieID");
-						$sth->bindValue(':id', $sid);
-						$sth->execute();
-					    while ($row2 = $sth->fetch(PDO::FETCH_BOTH)){
+					    $sth2 = $db->prepare("SELECT * FROM shows,movie WHERE showID= :id AND shows.movieID = movie.movieID");
+						$sth2->bindValue(':id', $sid);
+						$sth2->execute();
+					    while ($row2 = $sth2->fetch(PDO::FETCH_BOTH)){
 							echo "<td> $row2[movieName] </td>";
 							echo "<td> $row2[2] </td>";
 						}
@@ -105,8 +105,8 @@ $cid = ($_GET["id"]); ?>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 $('.cb').mousedown(function() {
-    if (!$(this).is(':checked')) {
-        this.checked = confirm("Are you sure?");
+    var op = confirm("Are you sure?");
+    if (op==true){
         $(this).trigger("change");
         $action = this.id;
         $id = this.value;
@@ -117,7 +117,6 @@ $('.cb').mousedown(function() {
         else{
         	window.location.href = "./cancel_client.php?cid="+$cid+"&id="+$id;
         }
-
     }
 });
 </script>

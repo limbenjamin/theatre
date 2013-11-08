@@ -32,10 +32,10 @@
 if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
-$dbuser = 'webuser';
+$dbuser = 'root';
 $dbpass = 'dbpassword';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'dbpassword');
+$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 if(! $conn )
@@ -58,26 +58,36 @@ if(! $conn )
 		die('Duration is not Correct.');
 	}
 
-
-	//check show overlap
-	$sth = $db->prepare("SELECT startTime,endTime FROM shows WHERE hallID=:id AND showID<>:sid");
-			$sth->bindValue(':id', $hallID);
-			$sth->bindValue(':sid', $showID);
-			$sth->execute();
-			while($row = $sth->fetch(PDO::FETCH_BOTH)) {
-				$retval = datesOverlap($row[0],$row[1],$startTime,$endTime);
-				if ($retval == 1){
-					die('Overlap in dates');
-					echo "<h3>Whoops, there's an overlap in the start datetime and end datetime with another show at the same venue!</h3>";
-					echo "<h4>Please add a valid time range with no clashes!</h4>";
-				}
-			}
+	//check show overlap and modify or add booking
 	if (is_null($showID)){
+		$sth = $db->prepare("SELECT startTime,endTime FROM shows WHERE hallID=:id");
+		$sth->bindValue(':id', $hallID);
+		$sth->execute();
+		while($row = $sth->fetch(PDO::FETCH_BOTH)) {
+			$retval = datesOverlap($row[0],$row[1],$startTime,$endTime);
+			if ($retval == 1){
+				echo "<h3>Whoops, there's an overlap in the start datetime and end datetime with another show at the same venue!</h3>";
+				echo "<h4>Please add a valid time range with no clashes!</h4>";
+				die();
+			}
+		}
 		$sql = "INSERT INTO `theatre`.`shows` (`showID`, `movieID`, `hallID`, `duration`, `startTime`, `endTime`) 
 		VALUES (null, '$movieID', '$hallID', '$duration', '$startTime', '$endTime');";
 
 	}
 	else{
+		$sth = $db->prepare("SELECT startTime,endTime FROM shows WHERE hallID=:id AND showID<>:sid");
+		$sth->bindValue(':id', $hallID);
+		$sth->bindValue(':sid', $showID);
+		$sth->execute();
+		while($row = $sth->fetch(PDO::FETCH_BOTH)) {
+			$retval = datesOverlap($row[0],$row[1],$startTime,$endTime);
+			if ($retval == 1){
+				echo "<h3>Whoops, there's an overlap in the start datetime and end datetime with another show at the same venue!</h3>";
+				echo "<h4>Please add a valid time range with no clashes!</h4>";
+				die();
+			}
+		}
 		$sql = "UPDATE `theatre`.shows SET movieID='$movieID', hallID='$hallID', duration='$duration', startTime='$startTime', 
 		endTime='$endTime' WHERE showID='$showID'";
 	}
@@ -102,6 +112,7 @@ function datesOverlap($start_one,$end_one,$start_two,$end_two) {
 
    return 0; //Return 0 if there is no overlap
 }
+header("Location: adminshow.php");
 ?>
 </div>
 </div>
