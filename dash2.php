@@ -34,7 +34,7 @@ if(isset($_POST['search']))
 	$title = $_POST['title'];
 	$cinema = $_POST['cinema'];
 	$date = $_POST['date'];
-	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'dbpassword');
+	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$cid = ($_GET["id"]);
@@ -172,7 +172,7 @@ echo "</div>";
     </tr>        
 	<tr>
 	<tr>
-	<td width="100">pay now</td>
+	<td width="100">pay now (yes/no)</td>
 	<td><input name="paid" type="text" id="paid"></td>
 	</tr>
 	<tr>
@@ -189,8 +189,8 @@ echo "</div>";
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 $('.cb').mousedown(function() {
-    if (!$(this).is(':checked')) {
-        this.checked = confirm("Are you sure?");
+    var op = confirm("Are you sure?");
+    if (op==true){
         $(this).trigger("change");
         $action = this.id;
         $id = this.value;
@@ -201,7 +201,6 @@ $('.cb').mousedown(function() {
         else{
         	window.location.href = "./cancel_client.php?cid="+$cid+"&id="+$id;
         }
-
     }
 });
 </script>

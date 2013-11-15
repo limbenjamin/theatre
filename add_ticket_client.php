@@ -27,8 +27,8 @@
     </header>
 <br/>
 <section>
-<div class="container">    
-<?php
+<div class="container">
+<?php   
 if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
@@ -50,6 +50,12 @@ if(! $conn )
 	$paid = $_POST['paid'];
 	date_default_timezone_set('Asia/Singapore');
 	$date = date('Y-m-d H:i:s');
+	if ($paid == 'yes')
+		$paid = 1;
+	else if ($paid == 'no')
+		$paid = 0;
+	else
+		die('<h2>Please enter yes or no for pay now column</h2>');
 	//autofill concession level
 	if ($concession == 'ADULT')
 		$price = 10;
@@ -75,7 +81,7 @@ if(! $conn )
 				}
 	} catch(Exception $ex) {
 	    echo $ex;
-	}			
+	}		
 $sql = "INSERT INTO `theatre`.`ticket` (`ticketID`, `cID`, `showID`, `seatNo`, `price`, `concession`, `paid`, `bookDateTime`, `paidDateTime`) 
 		VALUES (null, '$customerID', '$showID','$seatNo', '$price', '$concession', '$paid', '$date', '$paiddate');";
 
@@ -132,8 +138,7 @@ mysql_close($conn);
 else
 {
 }
-//header("Location: dash.php?id=".$customerID);
-?>
+echo '<div class="span8"><h3>Click <a href="./dash.php?id=4001">here</a> to return to the dashboard</h3></div>';?>
 </div>
 </div>
 </div>

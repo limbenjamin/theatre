@@ -30,7 +30,7 @@
 <div class="span4">           
 <?php
 
-	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'webuser', 'dbpassword');
+	$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
       date_default_timezone_set('Asia/Singapore');

@@ -30,7 +30,7 @@
 <div class="container">
 <?php
 $dbhost = 'localhost';
-$dbuser = 'webuser';
+$dbuser = 'root';
 $dbpass = 'dbpassword';
 $con=mysqli_connect($dbhost, $dbuser, $dbpass,"theatre");
 if(! $con )
@@ -50,7 +50,7 @@ if(! $con )
 	}
 
 echo "<h2>Thank You! Your Payment is Successful!</h2>";
-//header("Location: dash.php?id=".$customerID);
+echo '<h3>Click <a href="./dash.php?id=4001">here</a> to return to the dashboard</h3>';
 ?>
 </div>
 </section>

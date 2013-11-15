@@ -42,7 +42,7 @@
     <?php
 
     $host = "localhost"; 
-    $user = "webuser";
+    $user = "root";
     $pass = "dbpassword"; 
     $db = "theatre";
     $sid = ($_GET["id"]); 
@@ -124,7 +124,7 @@
             </table>
             </form><br/>
             <h3 class="folio-title"><span class="main-color"><i class="fa-icon-minus-sign"></i> Remove a Customer</span></h3>
-            <form method="post" action="delete_any.php">
+            <form method="post" action="delete_any.php" onsubmit="return confirm('Are you sure?')">
             <table class="formtable">
             <tr>
             <td width="100">Customer ID</td>
@@ -147,8 +147,8 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 $('.cb').mousedown(function() {
-    if (!$(this).is(':checked')) {
-        this.checked = confirm("Are you sure?");
+    var op = confirm("Are you sure?");
+    if (op==true){
         $(this).trigger("change");
         $id = this.id;
         $value = this.value;

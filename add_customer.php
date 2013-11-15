@@ -40,6 +40,6 @@ if(isset($_POST['add']))
 else
 {
 }
-header("Location: admin.php");
+header("Location: admincustomer.php");
 die();
 ?>
