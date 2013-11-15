@@ -38,9 +38,35 @@ $cid = ($_GET["id"]); ?>
 			<div class="well">
 		    <h3 class="folio-title"><span class="main-color"><i class="fa-icon-search"></i> Search for Movies</span></h3>
 			<?php echo'<form method="post" action="dash2.php?id='.$cid.'">'; ?>
-				<label>Movie Title</label> <input type="text" id="title" name="title" class="span3"/><br>
-				<label>Cinema</label> <input type="text" id="cinema" name="cinema" class="span3"/><br>
-				<label>Date</label> <input type="text" id="date" name="date" class="span3"/><br>
+				<label>Movie Title</label>
+				<?php
+				    $sth1 = $db->prepare("SELECT movieName FROM movie");
+				    $sth1->execute();
+				?>
+				<select id="title" name="title">
+				    <option value="">All</option>
+				    <?php 
+				        while($row1 = $sth1->fetch(PDO::FETCH_BOTH)) {
+				           echo "<option value='".$row1[0]."'> $row1[0] </option>";
+				        }
+				    ?>
+				</select>
+				<br>
+				<label>Cinema</label>
+				<?php
+				    $sth2 = $db->prepare("SELECT cinemaName FROM cinema");
+				    $sth2->execute();
+				?>
+				<select id="cinema" name="cinema">
+				    <option value="">All</option>
+				    <?php 
+				        while($row2 = $sth2->fetch(PDO::FETCH_BOTH)) {
+				           echo "<option value='".$row2[0]."'> $row2[0] </option>";
+				        }
+				    ?>
+				</select>    
+				<br>
+				<label>Date</label> <input type="date" min="<?php echo date('Y-m-d'); ?>" id="date" name="date" class="span3"/><br>
 	       		<input name="search" class="btn btn-info" type="submit" id="search" value="Submit">
 	        </form>
             </div>		
@@ -53,6 +79,7 @@ $cid = ($_GET["id"]); ?>
 			<th>Ticket ID</th>
 			<th>Movie Name</th>
 			<th>Hall No.</th>
+			<th>Cinema</th>
 			<th>Seat No.</th>
 			<th>Price</th>
 			<th>Concession</th>
@@ -77,6 +104,12 @@ $cid = ($_GET["id"]); ?>
 							echo "<td> $row2[movieName] </td>";
 							echo "<td> $row2[2] </td>";
 						}
+					    $sth3 = $db->prepare("SELECT * FROM shows,hall,cinema WHERE showID= :id AND shows.hallID=hall.hallID AND hall.cinemaID = cinema.cinemaID");
+						$sth3->bindValue(':id', $sid);
+						$sth3->execute();
+					    while ($row3 = $sth3->fetch(PDO::FETCH_BOTH)){
+							echo "<td> $row3[cinemaName] </td>";
+						}						
 					    echo "<td> $row[3] </td>";
 					    echo "<td> $$row[4].00 </td>";
 					    echo "<td> $row[5] </td>";
@@ -120,6 +153,5 @@ $('.cb').mousedown(function() {
     }
 });
 </script>
-
 </body>
 </html>

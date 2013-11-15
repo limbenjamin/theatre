@@ -55,8 +55,6 @@ if(isset($_POST['search']))
 			else{
 					$date0 = $date . " 00:00:00";
 					$date1 = $date . " 23:59:00";
-					echo $date0;
-					echo $date1;
 					$sth = $db->prepare("SELECT * 
 					FROM shows, movie, hall, cinema
 					WHERE movieName LIKE '%$title%' 
@@ -151,7 +149,7 @@ echo "</div>";
 <br/>
 <div class="container">
 	<h3>New Booking<h3>
-	<?php echo'<form method="post" action="add_ticket_client.php?id='.$cid.'">'; ?>
+	<?php echo'<form method="post" action="add_ticket_client.php?id='.$cid.'">'; ?>	
 	<table class="table-condensed">
 	<tr>
 	<td width="100">show no.</td>
@@ -172,8 +170,13 @@ echo "</div>";
     </tr>        
 	<tr>
 	<tr>
-	<td width="100">pay now (yes/no)</td>
-	<td><input name="paid" type="text" id="paid"></td>
+	<td width="100">Pay Now</td>
+	<td>
+		<select id="paid" name="paid">
+		    <option value="yes">Yes</OPTION>
+		    <option value="no">No</option>
+		</select>
+	</td>
 	</tr>
 	<tr>
 	<td width="100"></td>
