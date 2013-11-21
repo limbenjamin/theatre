@@ -3,7 +3,7 @@ if(isset($_POST['add']))
 {
 	$dbhost = 'localhost';
 	$dbuser = 'root';
-	$dbpass = 'dbpassword';
+	$dbpass = '';
 	$conn = mysql_connect($dbhost, $dbuser, $dbpass);
 	if(! $conn )
 	{

@@ -33,9 +33,9 @@ if(isset($_POST['add']))
 {
 $dbhost = 'localhost';
 $dbuser = 'root';
-$dbpass = 'dbpassword';
+$dbpass = '';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', 'dbpassword');
+$db = new PDO('mysql:host=localhost;dbname=theatre;charset=utf8', 'root', '');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 if(! $conn )
@@ -138,7 +138,7 @@ mysql_close($conn);
 else
 {
 }
-echo '<div class="span8"><h3>Click <a href="./dash.php?id=4001">here</a> to return to the dashboard</h3></div>';?>
+echo '<div class="span8"><h3>Click <a href="./dash.php?id='.$customerID.'">here</a> to return to the dashboard</h3></div>';?>
 </div>
 </div>
 </div>
